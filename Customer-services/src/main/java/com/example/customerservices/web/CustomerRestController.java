@@ -22,7 +22,7 @@ public class CustomerRestController {
     public List<Customer> customerList(){
         return customerRepository.findAll();
     }
-    @GetMapping("/customers/id")
+    @GetMapping("/customers/{id}")
     public Customer customerById(@PathVariable Long id){
         return customerRepository.findById(id).get();
     }

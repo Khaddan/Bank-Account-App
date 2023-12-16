@@ -1,12 +1,28 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {CommonModule, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [],
+  imports: [HttpClientModule,  CommonModule],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.css'
 })
-export class CustomersComponent {
+export class CustomersComponent implements OnInit{
+  customers:any;
+  constructor(private http:HttpClient ) {
+  }
+  ngOnInit() {
+    this.http.get("http://localhost:8888/CUSTOMER-SERVICES/customers")
+      .subscribe({
+        next : data => {
+          this.customers=data
+        },
+        error:err => {
+          console.log(err);
+        }
+      })
+  }
 
 }
